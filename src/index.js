@@ -18,7 +18,7 @@ import {
   CognitoUserAttribute,
 } from 'amazon-cognito-identity-js';
 // import config from '../config.js';
-import './CognitoSignup.css';
+// import './CognitoSignup.css';
 
 const textFieldStyle = {
   whiteStyle: {
