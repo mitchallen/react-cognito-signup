@@ -1,0 +1,17 @@
+@media all and (min-width: 480px) {
+    .CognitoSignup {
+      padding: 60px 0;
+    }
+  
+    .CognitoSignup form {
+      margin: 0 auto;
+      max-width: 320px;
+    }
+  }
+  
+  .CognitoSignup form span.help-block {
+    font-size: 14px;
+    padding-bottom: 10px;
+    color: #999;
+  }
+  
