@@ -1,6 +1,7 @@
 var path = require('path');
 module.exports = {
-  entry: './src/index.js',
+  context: path.join(__dirname, 'public', 'index.html'),
+  entry: path.join(__dirname, 'src', 'App.js'),
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'index.js',
@@ -15,7 +16,14 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['env']
+            presets: ['env'],
+            plugins: [
+              require('babel-plugin-transform-runtime'),
+              require('babel-plugin-transform-regenerator'),
+              require('babel-plugin-transform-class-properties'),
+              require('babel-plugin-transform-object-rest-spread'),
+              require('babel-plugin-transform-react-jsx')
+            ]
           }
         }
       }
