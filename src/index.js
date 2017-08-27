@@ -113,8 +113,8 @@ class CognitoSignup extends React.Component {
 
   signup(username, password) {
     const userPool = new CognitoUserPool({
-      UserPoolId: config.cognito.USER_POOL_ID,
-      ClientId: config.cognito.APP_CLIENT_ID
+      UserPoolId: this.props.cognitoUserPoolId,
+      ClientId: this.props.cognitoAppClientId
     });
     const attributeEmail = new CognitoUserAttribute({ Name : 'email', Value : username });
   
@@ -235,7 +235,9 @@ class CognitoSignup extends React.Component {
 }
 
 CognitoSignup.propTypes = {
-  history: PropTypes.object
+  history: PropTypes.object,
+  cognitoUserPoolId: PropTypes.string,  // TODO .isRequired
+  cognitoAppClientId: PropTypes.string  // TODO .isRequired
 };
 
 export default withRouter(CognitoSignup);
