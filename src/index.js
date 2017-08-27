@@ -3,7 +3,7 @@
     Author: Mitch Allen
 */
 
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import CardGrey from '@mitchallen/react-card-grey';
@@ -234,8 +234,8 @@ class CognitoSignup extends React.Component {
   }
 }
 
-// CognitoSignup.propTypes = {
-//   // someProp: PropTypes.isRequired,
-// };
+CognitoSignup.propTypes = {
+  history: PropTypes.object
+};
 
 export default withRouter(CognitoSignup);
