@@ -22,6 +22,8 @@ class App extends Component {
     const childProps = {
       userToken: this.state.userToken,
       updateUserToken: this.updateUserToken,
+      cognitoUserPoolId: process.env.REACT_APP_SIGNUP_TEST_POOL_ID,
+      cognitoAppClientId: process.env.REACT_APP_SIGNUP_TEST_APP_ID
     };
 
     return (

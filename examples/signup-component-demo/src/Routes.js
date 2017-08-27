@@ -12,12 +12,9 @@ import CognitoSignup from '@mitchallen/react-cognito-signup';
  * You must also modify src/index.js (see this projects example)
  */
 
-const cognitoUserPoolId = `${SIGNUP_TEST_POOL_ID}`;
-const cognitoAppClientId = `${SIGNUP_TEST_APP_ID}`
-
 const Routes = ({ childProps }) => (
   <Switch>
-    <AppliedRoute path='/signup' cognitoUserPoolId={cognitoUserPoolId} cognitoAppClientId={cognitoAppClientId} exact component={CognitoSignup} props={childProps} />
+    <AppliedRoute path='/signup' cognitoUserPoolId='{cognitoUserPoolId}' cognitoAppClientId='{cognitoAppClientId}' exact component={CognitoSignup} props={childProps} />
     { /* Finally, catch all unmatched routes */ }
      <Route component={NotFound} />
   </Switch>
