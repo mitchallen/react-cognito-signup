@@ -14,7 +14,7 @@ import CognitoSignup from '@mitchallen/react-cognito-signup';
 
 const Routes = ({ childProps }) => (
   <Switch>
-    <AppliedRoute path='/' exact component={CognitoSignup} props={childProps} />
+    <AppliedRoute path='/signup' exact component={CognitoSignup} props={childProps} />
     { /* Finally, catch all unmatched routes */ }
      <Route component={NotFound} />
   </Switch>
