@@ -236,8 +236,8 @@ class CognitoSignup extends React.Component {
 
 CognitoSignup.propTypes = {
   history: PropTypes.object,
-  cognitoUserPoolId: PropTypes.string,  // TODO .isRequired
-  cognitoAppClientId: PropTypes.string  // TODO .isRequired
+  cognitoUserPoolId: PropTypes.string.isRequired, 
+  cognitoAppClientId: PropTypes.string.isRequired  
 };
 
 export default withRouter(CognitoSignup);

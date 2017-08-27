@@ -130,6 +130,11 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 
 ## Version History
 
+#### Version 0.1.3
+
+* Made pool parameters a requirement
+* Added pool parameters to router call in demo
+
 #### Version 0.1.2
 
 * Updated example to use published package 
