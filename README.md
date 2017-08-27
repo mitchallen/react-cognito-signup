@@ -130,6 +130,11 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 
 ## Version History
 
+#### Version 0.1.4
+
+* Added home page to demo
+* Fixed env vars in demo so they start with REACT_APP_ (or else they won't load)
+
 #### Version 0.1.3
 
 * Made pool parameters a requirement

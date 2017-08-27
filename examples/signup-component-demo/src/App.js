@@ -22,6 +22,7 @@ class App extends Component {
     const childProps = {
       userToken: this.state.userToken,
       updateUserToken: this.updateUserToken,
+      // Env vars MUST start with "REACT_APP" to be loaded
       cognitoUserPoolId: process.env.REACT_APP_SIGNUP_TEST_POOL_ID,
       cognitoAppClientId: process.env.REACT_APP_SIGNUP_TEST_APP_ID
     };
@@ -35,6 +36,7 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+        <a href="/signup"><b>Signup</b></a>
         <Routes childProps={childProps} />
       </div>
     );

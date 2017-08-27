@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import AppliedRoute from './components/AppliedRoute';
 
 import NotFound from './pages/NotFound';
+import Home from './pages/Home';
 import CognitoSignup from '@mitchallen/react-cognito-signup';
 
 // <AppliedRoute path='/' exact component={CognitoSignup} props={childProps} />
@@ -14,6 +15,7 @@ import CognitoSignup from '@mitchallen/react-cognito-signup';
 
 const Routes = ({ childProps }) => (
   <Switch>
+    <AppliedRoute path='/' exact component={Home} props={childProps} />
     <AppliedRoute path='/signup' cognitoUserPoolId='{cognitoUserPoolId}' cognitoAppClientId='{cognitoAppClientId}' exact component={CognitoSignup} props={childProps} />
     { /* Finally, catch all unmatched routes */ }
      <Route component={NotFound} />
