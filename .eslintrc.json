@@ -1,4 +1,7 @@
 {
+    "plugins": [
+        "react"
+    ],
     "env": {
         "browser": true,
         "commonjs": true,
@@ -10,11 +13,16 @@
         "strict": 0
     },
     "parserOptions": {
+        "ecmaVersion": 6,
         "ecmaFeatures": {
             "jsx": true
         },
         "sourceType": "module"
     },
+    "extends": [
+        "eslint:recommended", 
+        "plugin:react/recommended"
+    ], 
     "rules": {
         "no-const-assign": "warn",
         "no-this-before-super": "warn",
