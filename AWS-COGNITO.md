@@ -1,18 +1,11 @@
 # AWS Cognito Setup
 
-## References
-
-* http://serverless-stack.com
 
 ## Steps
 
-You must create a bucket first. See:
-
-http://serverless-stack.com/chapters/create-an-s3-bucket-for-file-uploads.html
-
 1. Browse to: https://console.aws.amazon.com/cognito/
 2. Click: __Manage your User Pools__
-3. Click: __Create a User Pool__
+3. Click: __Create a user pool__
 4. Enter a __Pool name__ (example: *my-app-user-pool*)
 5. Click: __Review defaults__
 6. Click: __Create pool__ (at bottom of page)
@@ -40,9 +33,9 @@ __Note that the email used (in two places below) must be valid because a confirm
 $ aws cognito-idp sign-up \
   --region us-east-1 \
   --client-id YOUR_COGNITO_APP_CLIENT_ID \
-  --username admin@example.com \
-  --password Passw0rd! \
-  --user-attributes Name=email,Value=admin@example.com
+  --username VALID_EMAIL_ADDRESS \
+  --password PASSWORD \
+  --user-attributes Name=email,Value=VALID_EMAIL_ADDRESS
 ```
 
 ### Example
@@ -52,10 +45,10 @@ The password should have at least one cap letter, one number and one symbol
 ```
 $ aws cognito-idp sign-up \
   --region us-east-1 \
-  --client-id YOUR-CLIENT-ID \
-  --username VALID_EMAIL_ADDRESS \
-  --password PASSWORD \
-  --user-attributes Name=email,Value=VALID_EMAIL_ADDRESS
+  --client-id YOUR_COGNITO_APP_CLIENT_ID \
+  --username admin@example.com \
+  --password Passw0rd! \
+  --user-attributes Name=email,Value=admin@example.com
 ```
 
 This triggers an email sent with a confirmation code to the test user.
@@ -69,64 +62,7 @@ $ aws cognito-idp admin-confirm-sign-up \
   --username admin@YOURDOMAIN.com
 ```
 
-## Create Identity Pool
-
-Create a federated Cognito identity pool using the User Pool acting as the federated identity provider.
-
-## Steps
-
-1. Browse to: https://console.aws.amazon.com/cognito/
-2. Click: __Manage Federated Identities__
-3. Click: __Create new identity pool__ (may be different if no other pools exist yet)
-4. Set __Identity pool name__: (like *myapp identity pool*)
-5. Expand: __Authentication providers__
-6. Make sure the __Cognito__ tab is selected
-7. Set __User Pool ID__ to the value saved earlier
-8. Set __App Client ID__ to the value saved earlier
-9. Click: __Create Pool__
-10. Expand: __View Details__
-11. Expand: __View Policy Document__
-12. Click: __Edit__ / __[OK]__
-13. Set the value to (replace __YOUR\_S3\_UPLOADS\_BUCKET\_NAME__ - like ```my-app-uploads```):
-
-    ```
-    {
-      "Version": "2012-10-17",
-      "Statement": [
-        {
-          "Effect": "Allow",
-          "Action": [
-            "mobileanalytics:PutEvents",
-            "cognito-sync:*",
-            "cognito-identity:*"
-          ],
-          "Resource": [
-            "*"
-          ]
-        },
-        {
-          "Effect": "Allow",
-          "Action": [
-            "s3:*"
-          ],
-          "Resource": [
-            "arn:aws:s3:::YOUR_S3_UPLOADS_BUCKET_NAME/${cognito-identity.amazonaws.com:sub}*"
-          ]
-        }
-      ]
-    }
-    ```
-
-14. Click: __Allow__
-15. Click: __Dashboard__ on the left side menu
-16. Make sure your current app is selected
-17. Click: __Edit identity pool__
-18. Copy and save the __Identity pool id__
-19. Click: __Cancel__
-
 ## Configuration
-
-See: http://serverless-stack.com/chapters/login-with-aws-cognito.html
 
 1. Create: ```src/config.js```
 2. Paste in this content and replace the values:
@@ -140,7 +76,7 @@ See: http://serverless-stack.com/chapters/login-with-aws-cognito.html
     };
     ```
 
-3. Include the files in src/containers/Login.js, etc.
+3. Include the file in your source.
 
     ````
     import config from '../config.js';
