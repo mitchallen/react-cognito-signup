@@ -5,6 +5,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build-react": "react-scripts build",
+    "serve": "serve -s -c 0 build",
     "build-webpack": "webpack -p",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
