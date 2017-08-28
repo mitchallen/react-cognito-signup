@@ -236,8 +236,11 @@ class CognitoSignup extends React.Component {
 
 CognitoSignup.propTypes = {
   history: PropTypes.object,
+  updateUserToken: PropTypes.string,
   cognitoUserPoolId: PropTypes.string.isRequired, 
   cognitoAppClientId: PropTypes.string.isRequired  
 };
 
-export default withRouter(CognitoSignup);
+// export default withRouter(CognitoSignup);
+
+export default CognitoSignup;
