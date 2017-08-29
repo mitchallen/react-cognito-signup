@@ -5,7 +5,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 import CardGrey from '@mitchallen/react-card-grey';
 import { orange500, cyanA100, grey400 } from 'material-ui/styles/colors';
 import EmailInputField from '@mitchallen/react-email-input-field';
@@ -51,42 +51,59 @@ class CognitoSignup extends React.Component {
       password: '',
       confirmPassword: '',
       confirmationCode: '',
-      newUser: null,
+      newUser: null
     };
   }
 
   validateForm() {
+    try {
     return this.state.username.length > 0
       && this.state.password.length > 0
       && this.state.password === this.state.confirmPassword;
+    } catch(e) {
+      alert(e);
+    }
   }
 
   validateConfirmationForm() {
-    return this.state.confirmationCode.length > 0;
+    try {
+      return this.state.confirmationCode.length > 0;
+    } catch(e) {
+      alert(e);
+    }
   }
 
   handleChange = (event) => {
-    this.setState({
-      [event.target.id]: event.target.value
-    });
+    try {
+      this.setState({
+        [event.target.id]: event.target.value
+      });
+    } catch(e) {
+      alert(e);
+    }
   }
 
   handleSubmit = async (event) => {
-    event.preventDefault();
-  
-    this.setState({ isLoading: true });
-  
     try {
-      const newUser = await this.signup(this.state.username, this.state.password);
-      this.setState({
-        newUser: newUser
-      });
-    }
-    catch(e) {
+      event.preventDefault();
+    
+      this.setState({ isLoading: true });
+    
+      try {
+        const newUser = await this.signup(this.state.username, this.state.password);
+        this.setState({
+          newUser: newUser
+        });
+      }
+      catch(e) {
+        alert(e);
+      }
+    
+      this.setState({ isLoading: false });
+
+    } catch(e) {
       alert(e);
     }
-  
-    this.setState({ isLoading: false });
   }
 
   handleConfirmationSubmit = async (event) => {
@@ -112,22 +129,26 @@ class CognitoSignup extends React.Component {
   }
 
   signup(username, password) {
-    const userPool = new CognitoUserPool({
-      UserPoolId: this.props.cognitoUserPoolId,
-      ClientId: this.props.cognitoAppClientId
-    });
-    const attributeEmail = new CognitoUserAttribute({ Name : 'email', Value : username });
-  
-    return new Promise((resolve, reject) => (
-      userPool.signUp(username, password, [attributeEmail], null, (err, result) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-  
-        resolve(result.user);
-      })
-    ));
+    try {
+      const userPool = new CognitoUserPool({
+        UserPoolId: this.props.cognitoUserPoolId,
+        ClientId: this.props.cognitoAppClientId
+      });
+      const attributeEmail = new CognitoUserAttribute({ Name : 'email', Value : username });
+    
+      return new Promise((resolve, reject) => (
+        userPool.signUp(username, password, [attributeEmail], null, (err, result) => {
+          if (err) {
+            reject(err);
+            return;
+          }
+    
+          resolve(result.user);
+        })
+      ));
+    } catch(e) {
+      alert(e);
+    }
   }
   
   confirm(user, confirmationCode) {
@@ -143,18 +164,22 @@ class CognitoSignup extends React.Component {
   }
   
   authenticate(user, username, password) {
-    const authenticationData = {
-      Username: username,
-      Password: password
-    };
-    const authenticationDetails = new AuthenticationDetails(authenticationData);
-  
-    return new Promise((resolve, reject) => (
-      user.authenticateUser(authenticationDetails, {
-        onSuccess: (result) => resolve(result.getIdToken().getJwtToken()),
-        onFailure: (err) => reject(err),
-      })
-    ));
+    try {
+      const authenticationData = {
+        Username: username,
+        Password: password
+      };
+      const authenticationDetails = new AuthenticationDetails(authenticationData);
+    
+      return new Promise((resolve, reject) => (
+        user.authenticateUser(authenticationDetails, {
+          onSuccess: (result) => resolve(result.getIdToken().getJwtToken()),
+          onFailure: (err) => reject(err),
+        })
+      ));
+    } catch(e) {
+      alert(e);
+    }
   }
 
   /*

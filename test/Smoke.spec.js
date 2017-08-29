@@ -9,7 +9,7 @@ import CognitoSignup from '../src/index';
 describe('CognitoSignup', () => {
 
   const renderer = new ShallowRenderer();
-  renderer.render(<CognitoSignup />);
+  renderer.render(<CognitoSignup  cognitoUserPoolId='foo' cognitoAppClientId='fubar' />);
   const result = renderer.getRenderOutput();
 
 
