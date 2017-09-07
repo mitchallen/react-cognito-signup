@@ -259,9 +259,8 @@ class CognitoSignup extends React.Component {
 }
 
 CognitoSignup.propTypes = {
-  history: PropTypes.object,
   amazonCognitoIdentity: PropTypes.object.isRequired,
-  updateUserToken: PropTypes.string,
+  updateUserToken: PropTypes.func.isRequired,
   cognitoUserPoolId: PropTypes.string.isRequired, 
   cognitoAppClientId: PropTypes.string.isRequired  
 };

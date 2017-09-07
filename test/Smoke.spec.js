@@ -6,15 +6,26 @@ const expect = Chai.expect;
 
 import CognitoSignup from '../src/index';
 
+const updateUserToken = (token) => {
+	// TODO
+}
+
+const aci = {
+
+};
+
 describe('CognitoSignup', () => {
 
   const renderer = new ShallowRenderer();
-  renderer.render(<CognitoSignup  cognitoUserPoolId='foo' cognitoAppClientId='fubar' />);
+  renderer.render(<CognitoSignup  
+    updateUserToken={updateUserToken}
+    amazonCognitoIdentity={aci}
+    cognitoUserPoolId='foo' 
+    cognitoAppClientId='fubar' />);
   const result = renderer.getRenderOutput();
 
 
   it('root element should be a div', () => {
-    console.log(result);
     // expect(wrapper.type()).to.eql('div');
     expect(result.type).to.eql('div');
   });

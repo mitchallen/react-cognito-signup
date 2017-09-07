@@ -130,6 +130,10 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 
 ## Version History
 
+#### Version 0.1.8
+
+* Removed amazon-cognito-identity-js
+
 #### Version 0.1.7
 
 * Added ```run: yard add react``` to ```.circleci/config.yml```
