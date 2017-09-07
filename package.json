@@ -1,6 +1,6 @@
 {
   "name": "@mitchallen/react-cognito-signup",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "CognitoSignup component",
   "main": "build/index.js",
   "scripts": {
