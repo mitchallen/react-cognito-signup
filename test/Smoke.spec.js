@@ -14,6 +14,7 @@ describe('CognitoSignup', () => {
 
 
   it('root element should be a div', () => {
+    console.log(result);
     // expect(wrapper.type()).to.eql('div');
     expect(result.type).to.eql('div');
   });

@@ -12,11 +12,11 @@ import EmailInputField from '@mitchallen/react-email-input-field';
 import PasswordInputField from '@mitchallen/react-password-input-field';
 import NumberInputField from '@mitchallen/react-number-input-field';
 import LoaderButton from '@mitchallen/react-loader-button';
-import {
-  AuthenticationDetails,
-  CognitoUserPool,
-  CognitoUserAttribute,
-} from 'amazon-cognito-identity-js';
+// import {
+//   AuthenticationDetails,
+//   CognitoUserPool,
+//   CognitoUserAttribute,
+// } from 'amazon-cognito-identity-js';
 // import config from '../config.js';
 // import './CognitoSignup.css';
 
@@ -130,11 +130,13 @@ class CognitoSignup extends React.Component {
 
   signup(username, password) {
     try {
-      const userPool = new CognitoUserPool({
+
+      const userPool = new this.props.amazonCognitoIdentity.CognitoUserPool({
         UserPoolId: this.props.cognitoUserPoolId,
         ClientId: this.props.cognitoAppClientId
       });
-      const attributeEmail = new CognitoUserAttribute({ Name : 'email', Value : username });
+
+      const attributeEmail = new this.props.amazonCognitoIdentity.CognitoUserAttribute({ Name : 'email', Value : username });
     
       return new Promise((resolve, reject) => (
         userPool.signUp(username, password, [attributeEmail], null, (err, result) => {
@@ -146,6 +148,7 @@ class CognitoSignup extends React.Component {
           resolve(result.user);
         })
       ));
+
     } catch(e) {
       alert(e);
     }
@@ -169,7 +172,8 @@ class CognitoSignup extends React.Component {
         Username: username,
         Password: password
       };
-      const authenticationDetails = new AuthenticationDetails(authenticationData);
+
+      const authenticationDetails = new this.props.amazonCognitoIdentity.AuthenticationDetails(authenticationData);
     
       return new Promise((resolve, reject) => (
         user.authenticateUser(authenticationDetails, {
@@ -181,9 +185,6 @@ class CognitoSignup extends React.Component {
       alert(e);
     }
   }
-
-  /*
-  */
 
   renderConfirmationForm() {
     return (
@@ -198,8 +199,6 @@ class CognitoSignup extends React.Component {
               onChange={this.handleChange}
             />
             <LoaderButton
-              block
-              bsSize='large'
               disabled={ !this.validateConfirmationForm() }
               type='submit'
               isLoading={this.state.isLoading}
@@ -261,6 +260,7 @@ class CognitoSignup extends React.Component {
 
 CognitoSignup.propTypes = {
   history: PropTypes.object,
+  amazonCognitoIdentity: PropTypes.object.isRequired,
   updateUserToken: PropTypes.string,
   cognitoUserPoolId: PropTypes.string.isRequired, 
   cognitoAppClientId: PropTypes.string.isRequired  
