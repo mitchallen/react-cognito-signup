@@ -113,13 +113,13 @@ class CognitoSignup extends React.Component {
   
     try {
       await this.confirm(this.state.newUser, this.state.confirmationCode);
-      const userToken = await this.authenticate(
+      await this.authenticate(
         this.state.newUser,
         this.state.username,
         this.state.password
       );
   
-      this.props.updateUserToken(userToken);
+      this.props.userHasAuthenticated(true);
       this.props.history.push('/');
     }
     catch(e) {
@@ -260,7 +260,7 @@ class CognitoSignup extends React.Component {
 
 CognitoSignup.propTypes = {
   amazonCognitoIdentity: PropTypes.object.isRequired,
-  updateUserToken: PropTypes.func.isRequired,
+  userHasAuthenticated: PropTypes.func.isRequired,
   cognitoUserPoolId: PropTypes.string.isRequired, 
   cognitoAppClientId: PropTypes.string.isRequired  
 };
